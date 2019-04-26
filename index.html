@@ -14,17 +14,19 @@
 	</head>
 	<body>
 		<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
-
+		<button onclick="undo()">Undo</button>
+		<button onclick="redo()">Redo</button>
 		<script src="js/three.js-master/build/three.js"></script>
 		<script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
 		<script>
+			var undoStack = [];
+			var redoStack = [];
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
-
 
 			// When resizing the window but doesnt work?
 			window.addEventListener( 'resize', function() {
@@ -41,7 +43,6 @@
 				cube.setColor(colors[color]);
 			}
 
-
 			controls = new THREE.OrbitControls( camera, renderer.donElement);
 			// create the obecjts
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -50,7 +51,12 @@
 			var cube = new THREE.Mesh( geometry, material );
 
 			cube.setColor = function(color){
+				console.log(cube.material.color);
+				var newCube = new THREE.Mesh( geometry, cube.material );
+				undoStack.push(newCube);
 				cube.material.color.set(color);
+				console.log(cube.material.color);
+				redoStack = [];
 			}
 
 			//cube.setColor(colors[1])
@@ -74,6 +80,25 @@
 
 				renderer.render( scene, camera );
 			};
+			var undo = function() {
+				console.log(undoStack);
+				if (undoStack.length != 0) {
+					var u = undoStack.pop();
+					console.log(cube.material.color);
+					console.log(u.material.color);
+					redoStack.push(cube);
+					console.log(u)
+					scene.remove(cube);
+					scene.add(u);
+				}
+			}
+			
+			var redo = function() {
+				if (redoStack.length != 0) {
+					var r = redoStack.pop();
+					cube = r;
+				}
+			}
 
 			animate();
 			//render()
