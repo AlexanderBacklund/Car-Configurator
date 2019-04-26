@@ -7,13 +7,15 @@
 				margin: 0;
 			}
 			canvas {
-				width: 100%; height: 100%
+				width: 100%; height: 10%0
 			}
 		</style>
 
 	</head>
 	<body>
-		<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
+		<div id="UI">
+			<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
+		</div>
 
 		<script src="js/three.js-master/build/three.js"></script>
 		<script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
@@ -25,7 +27,6 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
-
 			// When resizing the window but doesnt work?
 			window.addEventListener( 'resize', function() {
 				var width = window.innerWidth;
@@ -35,43 +36,53 @@
 				camera.updateProjectionMatrix();
 			});
 
-			//Alex test
+			// changing color function
 			var changeColor = function() {
-				color = Math.floor(Math.random() * 6);
-				cube.setColor(colors[color]);
+				colorA = Math.floor(Math.random() * 6);
+				colorB = Math.floor(Math.random() * 6);
+				cubeA.setColor(colors[colorA]);
+				cubeB.setColor(colors[colorB]);
 			}
 
-
+			//Controller
 			controls = new THREE.OrbitControls( camera, renderer.donElement);
-			// create the obecjts
+
+			// create the Cube A
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false} );
-			var colors = [0xff0b0b, 0xff8200,0x52ff00, 0x00ffb3, 0x0029ff, 0xf915e9];
-			var cube = new THREE.Mesh( geometry, material );
+			var cubeA = new THREE.Mesh( geometry, material );
+			cubeA.position.set(1,1,0)
 
-			cube.setColor = function(color){
-				cube.material.color.set(color);
+			// create the Cube B
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false} );
+			var cubeB = new THREE.Mesh( geometry, material );
+			cubeB.position.set(-1,-1,0)
+
+			// Different colors
+			var colors = [0xff0b0b, 0xff8200,0x52ff00, 0x00ffb3, 0x0029ff, 0xf915e9];
+
+			//Give the cubes the new function
+			cubeA.setColor = function(color){
+				cubeA.material.color.set(color);
+			}
+			cubeB.setColor = function(color){
+				cubeB.material.color.set(color);
 			}
 
-			//cube.setColor(colors[1])
-
-			scene.add( cube );
-
+			scene.add( cubeA, cubeB );
 			camera.position.z = 5;
-
 
 			// Draw Scene
 			var render = function() {
 				renderer.render(scene,camera)
 			}
 
-
+			//Make the cube rotate
 			var animate = function () {
 				requestAnimationFrame( animate );
-
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
-
+				cubeA.rotation.x += 0.01;
+				cubeA.rotation.y += 0.01;
 				renderer.render( scene, camera );
 			};
 
