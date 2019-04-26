@@ -13,6 +13,8 @@
 
 	</head>
 	<body>
+		<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
+
 		<script src="js/three.js-master/build/three.js"></script>
 		<script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
 		<script>
@@ -33,19 +35,30 @@
 				camera.updateProjectionMatrix();
 			});
 
+			//Alex test
+			var changeColor = function() {
+				color = Math.floor(Math.random() * 6);
+				cube.setColor(colors[color]);
+			}
+
+
 			controls = new THREE.OrbitControls( camera, renderer.donElement);
 			// create the obecjts
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			var material = new THREE.MeshBasicMaterial( { color: 0x26ba22, wireframe: false} );
-			var materials = [
-				new THREE.MeshBasicMaterial({color: 0x26ba22, wireframe: false}),
-				new THREE.MeshBasicMaterial({color: 0x5c0b96, wireframe: false}),
-				new THREE.MeshBasicMaterial({color: 0xd51ebd, wireframe: false})
-			];
-			var cube = new THREE.Mesh( geometry, materials[0] );
+			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false} );
+			var colors = [0xff0b0b, 0xff8200,0x52ff00, 0x00ffb3, 0x0029ff, 0xf915e9];
+			var cube = new THREE.Mesh( geometry, material );
+
+			cube.setColor = function(color){
+				cube.material.color.set(color);
+			}
+
+			//cube.setColor(colors[1])
+
 			scene.add( cube );
 
 			camera.position.z = 5;
+
 
 			// Draw Scene
 			var render = function() {
@@ -53,13 +66,6 @@
 			}
 
 
-			//Alex test
-			var changeColor = function () {
-				var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-				var newMaterial = new THREE.MeshBasicMaterial( { color: 0xee1212, wireframe: false} );
-				cube = new THREE.Mesh( geometry, newMaterial )
-				scene.ad(cube)
-			}
 			var animate = function () {
 				requestAnimationFrame( animate );
 
