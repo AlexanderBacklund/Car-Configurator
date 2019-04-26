@@ -51,11 +51,8 @@
 			var cube = new THREE.Mesh( geometry, material );
 
 			cube.setColor = function(color){
-				console.log(cube.material.color);
-				var newCube = new THREE.Mesh( geometry, cube.material );
-				undoStack.push(newCube);
+				undoStack.push(newCube());
 				cube.material.color.set(color);
-				console.log(cube.material.color);
 				redoStack = [];
 			}
 
@@ -80,28 +77,31 @@
 
 				renderer.render( scene, camera );
 			};
+			
 			var undo = function() {
-				console.log(undoStack);
 				if (undoStack.length != 0) {
 					var u = undoStack.pop();
-					console.log(cube.material.color);
-					console.log(u.material.color);
-					redoStack.push(cube);
-					console.log(u)
-					scene.remove(cube);
-					scene.add(u);
+					redoStack.push(newCube());
+					cube.material = u.material;
 				}
 			}
 			
 			var redo = function() {
 				if (redoStack.length != 0) {
 					var r = redoStack.pop();
-					cube = r;
+					undoStack.push(newCube());
+					cube.material = r.material;
 				}
+			}
+
+			var newCube = function(){
+				var oldCube = cube.clone();
+				oldCube.material = new THREE.MeshBasicMaterial( {color: oldCube.material.color, wireframe: false});
+				return oldCube;
 			}
 
 			animate();
 			//render()
 		</script>
 	</body>
-</html>
+	</html>
