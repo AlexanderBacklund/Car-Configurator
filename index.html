@@ -41,7 +41,7 @@
 			var changeColor = function() {
 				colorA = Math.floor(Math.random() * 6);
 				colorB = Math.floor(Math.random() * 6);
-				cubeA.setColor(colors[colorA]);
+				cube.setColor(colors[colorA]);
 				cubeB.setColor(colors[colorB]);
 			}
 
@@ -52,8 +52,8 @@
 			// create the Cube A
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false} );
-			var cubeA = new THREE.Mesh( geometry, material );
-			cubeA.position.set(1,1,0)
+			var cube = new THREE.Mesh( geometry, material );
+			cube.position.set(1,1,0)
 
 
 			cube.setColor = function(color){
@@ -73,14 +73,14 @@
 			var colors = [0xff0b0b, 0xff8200,0x52ff00, 0x00ffb3, 0x0029ff, 0xf915e9];
 
 			//Give the cubes the new function
-			cubeA.setColor = function(color){
-				cubeA.material.color.set(color);
-			}
+			// cubeA.setColor = function(color){
+			// 	cubeA.material.color.set(color);
+			// }
 			cubeB.setColor = function(color){
 				cubeB.material.color.set(color);
 			}
 
-			scene.add( cubeA, cubeB );
+			scene.add( cube );
 			camera.position.z = 5;
 
 			// Draw Scene
@@ -91,8 +91,8 @@
 			//Make the cube rotate
 			var animate = function () {
 				requestAnimationFrame( animate );
-				cubeA.rotation.x += 0.01;
-				cubeA.rotation.y += 0.01;
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
 				renderer.render( scene, camera );
 			};
 			
