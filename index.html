@@ -13,13 +13,14 @@
 
 	</head>
 	<body>
-		<div id="UI">
-			<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
-		</div>
-
+		<button type="button" class="button" id="button" onclick="changeColor()"> Button </button>
+		<button onclick="undo()">Undo</button>
+		<button onclick="redo()">Redo</button>
 		<script src="js/three.js-master/build/three.js"></script>
 		<script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
 		<script>
+			var undoStack = [];
+			var redoStack = [];
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
@@ -44,6 +45,7 @@
 				cubeB.setColor(colors[colorB]);
 			}
 
+
 			//Controller
 			controls = new THREE.OrbitControls( camera, renderer.donElement);
 
@@ -53,11 +55,19 @@
 			var cubeA = new THREE.Mesh( geometry, material );
 			cubeA.position.set(1,1,0)
 
+
+			cube.setColor = function(color){
+				undoStack.push(newCube());
+				cube.material.color.set(color);
+				redoStack = [];
+			}
+
 			// create the Cube B
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false} );
 			var cubeB = new THREE.Mesh( geometry, material );
 			cubeB.position.set(-1,-1,0)
+
 
 			// Different colors
 			var colors = [0xff0b0b, 0xff8200,0x52ff00, 0x00ffb3, 0x0029ff, 0xf915e9];
@@ -85,9 +95,31 @@
 				cubeA.rotation.y += 0.01;
 				renderer.render( scene, camera );
 			};
+			
+			var undo = function() {
+				if (undoStack.length != 0) {
+					var u = undoStack.pop();
+					redoStack.push(newCube());
+					cube.material = u.material;
+				}
+			}
+			
+			var redo = function() {
+				if (redoStack.length != 0) {
+					var r = redoStack.pop();
+					undoStack.push(newCube());
+					cube.material = r.material;
+				}
+			}
+
+			var newCube = function(){
+				var oldCube = cube.clone();
+				oldCube.material = new THREE.MeshBasicMaterial( {color: oldCube.material.color, wireframe: false});
+				return oldCube;
+			}
 
 			animate();
 			//render()
 		</script>
 	</body>
-</html>
+	</html>
