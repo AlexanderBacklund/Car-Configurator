@@ -18,6 +18,13 @@
 // Load 3D Scene
 var scene = new THREE.Scene(); 
 
+var carParts = {
+				body: [],
+				rims:[],
+				glass: [],
+			};
+var carModel;
+
 // Load Camera Perspektive
 var camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 20000 );
 camera.position.set( 1, 1, 20 );
@@ -50,7 +57,13 @@ loader.setDRACOLoader( new THREE.DRACOLoader() );
 // Optional: Pre-fetch Draco WASM/JS module, to save time while parsing.
 THREE.DRACOLoader.getDecoderModule();
 
-   loader.load( 'ferrari.glb', function ( gltf ) {            
+   loader.load( 'ferrari.glb', function ( gltf ) { 
+	carModel = gltf.scene.children[ 0 ];
+				carModel.traverse( function ( child ) {
+					//if ( child.isMesh  ) {
+					//child.material.envMap = envMap;
+				});
+
    var object = gltf.scene;				
    gltf.scene.scale.set( 2, 2, 2 );			   
    gltf.scene.position.x = 0;				    //Position (x = right+ left-) 
@@ -58,6 +71,20 @@ THREE.DRACOLoader.getDecoderModule();
    gltf.scene.position.z = 0;				    //Position (z = front +, back-)
    
    scene.add( gltf.scene );
+
+   // car parts for material selection
+   carParts.body.push( carModel.getObjectByName( 'body' ) );
+					carParts.rims.push(
+						carModel.getObjectByName( 'rim_fl' ),
+						carModel.getObjectByName( 'rim_fr' ),
+						carModel.getObjectByName( 'rim_rr' ),
+						carModel.getObjectByName( 'rim_rl' ),
+						carModel.getObjectByName( 'trim' ),
+					);
+					carParts.glass.push(
+						carModel.getObjectByName( 'glass' ),
+					 );
+					updateMaterials();
    });	 
 
 function animate() {
@@ -71,6 +98,7 @@ function render() {
 
 render();
 animate();
+
 
 </script>	
 </body>
