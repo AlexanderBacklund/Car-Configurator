@@ -12,5 +12,8 @@
   "white": "Vit",
   "language": "Vilket språk föredrar du?",
   "english": "Engelska",
-  "swedish": "Svenska"
+  "swedish": "Svenska",
+  "undoredo": "Ångra, göra om",
+  "undo": "Ångra",
+  "redo": "Göra om"
 }

@@ -12,5 +12,8 @@
   "white": "White",
   "language": "Which language do you prefer?",
   "english": "English",
-  "swedish": "Swedish"
+  "swedish": "Swedish",
+  "undoredo": "Undo, redo",
+  "undo": "Undo",
+  "redo": "Redo"
 }
