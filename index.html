@@ -21,36 +21,66 @@
     <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
     <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <div class="UI">
-    <h4 class="body">Change body color:</h4>
-    <button type="button" name="button" class="green" onclick="changeColorBody('green')">Green</button>
-    <button type="button" name="button" class="blue" onclick="changeColorBody('blue')">Blue</button>
-    <button type="button" name="button" class="yellow" onclick="changeColorBody('yellow')">Yellow</button>
-    <button type="button" name="button" class="red" onclick="changeColorBody('red')">Red</button>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <div class="row">
+
+    <div class="col s4">
+      <h4 class="body">Change body color:</h4>
+      <button type="button" name="button" class="green" onclick="changeColorBody('green')">Green</button>
+      <button type="button" name="button" class="blue" onclick="changeColorBody('blue')">Blue</button>
+      <button type="button" name="button" class="yellow" onclick="changeColorBody('yellow')">Yellow</button>
+      <button type="button" name="button" class="red" onclick="changeColorBody('red')">Red</button>
+    </div>
+    <div class="col s4">
+
     <h4 class="rim">Change rim color:</h4>
     <button type="button" name="button" class="green" onclick="changeColorRim('green')">Green</button>
     <button type="button" name="button" class="blue" onclick="changeColorRim('blue')">Blue</button>
     <button type="button" name="button" class="yellow" onclick="changeColorRim('yellow')">Yellow</button>
     <button type="button" name="button" class="red" onclick="changeColorRim('red')">Red</button>
     <button type="button" name="button" class="black" onclick="changeColorRim('black')">black</button>
+  </div>
+  <div class="col s4">
+
     <h4 class="leather">Change leather color: </h4>
     <button type="button" name="button" class="white" onclick="changeColorLeather(0xffffff)">White</button>
     <button type="button" name="button" class="grey" onclick="changeColorLeather('grey')">Grey</button>
     <button type="button" name="button" class="black" onclick="changeColorLeather(0x7a797a)">Black</button>
+  </div>
+<div class="col 4">
+
     <h4 class="details">Change details color: </h4>
     <button type="button" name="button" class="green" onclick="changeColorSmall('green')">Green</button>
     <button type="button" name="button" class="blue" onclick="changeColorSmall('blue')">Blue</button>
   </div>
-  <div>
+  <div class="col s4">
     <h4 class="language">Which language do you prefer?</h4>
     <button type="button" name="button" class="english"  onclick="setLanguage('en')">English</button>
     <button type="button" name="button" class="swedish"  onclick="setLanguage('sv')">Swedish</button>
   </div>
-  <div>
+  <div class="col s4">
     <h4 class="undoredo">Undo Redo:</h4>
       <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
       <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
   </div>
+</div>
+
+
+<div >
 
 
 <script>
@@ -338,6 +368,10 @@
     render();
     animate();
   </script>
+  </div>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 
 </html>
