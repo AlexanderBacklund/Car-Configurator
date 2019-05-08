@@ -1,186 +1,301 @@
 <!DOCTYPE html>
 <html>
-   <head>
-	   <title>Car config</title>
-	   <style>
-	   body { margin: 0; }
-	   canvas { width: 100%; height: 100% }
-	 </style>
- </head>
-   <body>
-	    <script src="js/three.js-master/build/three.js"></script>
-		  <script src="js/three.js-master/examples/js/loaders/GLTFLoader.js"></script>
-		  <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
-		  <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
-<div class="UI">
-  <h4>Change Body color:
-  <button type="button" name="button" onclick="changeColorBody('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorBody('blue')">Blue</button>
-  <button type="button" name="button" onclick="changeColorBody('yellow')">Yellow</button>
-  <button type="button" name="button" onclick="changeColorBody('red')">Red</button>
-  </h4>
-  <h4>Change Rim color:
-  <button type="button" name="button" onclick="changeColorRim('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorRim('blue')">Blue</button>
-  <button type="button" name="button" onclick="changeColorRim('yellow')">Yellow</button>
-  <button type="button" name="button" onclick="changeColorRim('red')">Red</button>
-  <button type="button" name="button" onclick="changeColorRim('black')">black</button>
-  </h4>
-  <h4>Change Leather color:
-  <button type="button" name="button" onclick="changeColorLeather(0xffffff)">White</button>
-  <button type="button" name="button" onclick="changeColorLeather('grey')">Grey</button>
-  <button type="button" name="button" onclick="changeColorLeather(0x7a797a)">Black</button>
-  <h4>Change small things color:
-  <button type="button" name="button" onclick="changeColorSmall('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorSmall('blue')">Blue</button>
-</div>
-<script>
 
-// Load 3D Scene
-var scene = new THREE.Scene();
+<head>
+  <title>Car config</title>
+  <style>
+    body {
+      margin: 0;
+    }
 
-var carParts = {
-				body: [],
-				rims:[],
-				glass: [],
-        leather: [],
-        rest: []
-			};
-var carModel;
+    canvas {
+      width: 100%;
+      height: 100%
+    }
+  </style>
+</head>
 
-// Load Camera Perspektive
-var camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 20000 );
-camera.position.set( -15, 9,15 );
+<body>
+  <script src="js/three.js-master/build/three.js"></script>
+    <script src="js/three.js-master/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
+  <div class="UI">
+    <h4>Change Body color:
+      <button type="button" name="button" onclick="changeColorBody('green')">Green</button>
+      <button type="button" name="button" onclick="changeColorBody('blue')">Blue</button>
+      <button type="button" name="button" onclick="changeColorBody('yellow')">Yellow</button>
+      <button type="button" name="button" onclick="changeColorBody('red')">Red</button>
+    </h4>
+    <h4>Change Rim color:
+      <button type="button" name="button" onclick="changeColorRim('green')">Green</button>
+      <button type="button" name="button" onclick="changeColorRim('blue')">Blue</button>
+      <button type="button" name="button" onclick="changeColorRim('yellow')">Yellow</button>
+      <button type="button" name="button" onclick="changeColorRim('red')">Red</button>
+      <button type="button" name="button" onclick="changeColorRim('black')">black</button>
+    </h4>
+    <h4>Change Leather color:
+      <button type="button" name="button" onclick="changeColorLeather(0xffffff)">White</button>
+      <button type="button" name="button" onclick="changeColorLeather('grey')">Grey</button>
+      <button type="button" name="button" onclick="changeColorLeather(0x7a797a)">Black</button>
+    </h4>
+    <h4>Change small things color:
+      <button type="button" name="button" onclick="changeColorSmall('green')">Green</button>
+      <button type="button" name="button" onclick="changeColorSmall('blue')">Blue</button>
+    </h4>
+    <h4>Undo Redo:
+      <button type="button" name="button" onclick="undo()">Undo</button>
+      <button type="button" name="button" onclick="redo()">Redo</button>
+    </h4>
+  </div>
+  <script>
+    // Load 3D Scene
+    var scene = new THREE.Scene();
 
-// Load a Renderer
-var renderer = new THREE.WebGLRenderer({ alpha: false });
-renderer.setClearColor( 0xC5C5C3 );
-renderer.setPixelRatio( window.devicePixelRatio );
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+    undoStack = [];
+    redoStack = [];
 
-// Load the Orbitcontroller
-var controls = new THREE.OrbitControls( camera, renderer.domElement );
+    var carParts = {
+      body: [],
+      rims: [],
+      glass: [],
+      leather: [],
+      rest: []
+    };
+    var carModel;
 
+    // Load Camera Perspektive
+    var camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 20000);
+    camera.position.set(-15, 9, 15);
 
-window.addEventListener( 'resize', function() {
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-	renderer.setSize( width, height)
-	camera.aspect = width / height;
-	camera.updateProjectionMatrix();
-});
+    // Load a Renderer
+    var renderer = new THREE.WebGLRenderer({
+      alpha: false
+    });
+    renderer.setClearColor(0xC5C5C3);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-// Load Light
-var ambientLight = new THREE.AmbientLight( 0xcccccc );
-scene.add( ambientLight );
-
-var directionalLight = new THREE.DirectionalLight( 0xffffff );
-directionalLight.position.set( 0, 1, 1 ).normalize();
-scene.add( directionalLight );
-// Optional: Provide a DRACOLoader instance to decode compressed mesh data
-
-
-// glTf 2.0 Loader
-var loader = new THREE.GLTFLoader();
-THREE.DRACOLoader.setDecoderPath( 'js/three.js-master/examples/js/libs/draco/' );
-loader.setDRACOLoader( new THREE.DRACOLoader() );
-
-// Optional: Pre-fetch Draco WASM/JS module, to save time while parsing.
-THREE.DRACOLoader.getDecoderModule();
-
-   loader.load( 'ferrari.glb', function ( gltf ) {
-	carModel = gltf.scene.children[ 0 ];
-				carModel.traverse( function ( child ) {
-					//if ( child.isMesh  ) {
-					//child.material.envMap = envMap;
-				});
-
-   var object = gltf.scene;
-   gltf.scene.scale.set( 2, 2, 2 );
-   gltf.scene.position.x = 0;				    //Position (x = right+ left-)
-	   gltf.scene.position.y = 0;				    //Position (y = up+, down-)
-   gltf.scene.position.z = 0;				    //Position (z = front +, back-)
-
-   scene.add( gltf.scene );
-
-   // car parts for material selection
-  carParts.body.push( carModel.getObjectByName( 'body' ) );
-	carParts.rims.push(
-	  carModel.getObjectByName( 'rim_fl' ),
-		carModel.getObjectByName( 'rim_fr' ),
-		carModel.getObjectByName( 'rim_rr' ),
-		carModel.getObjectByName( 'rim_rl' ),
-		);
-		carParts.glass.push(
-			carModel.getObjectByName( 'glass' ),
-		  );
-    carParts.leather.push(
-      carModel.getObjectByName( 'leather'),
-      carModel.getObjectByName( 'steering_leather'),
-    );
-    carParts.rest.push(
-      carModel.getObjectByName( 'trim' ),
-      carModel.getObjectByName( 'nuts'),
-      carModel.getObjectByName( 'yellow_trim'),
-
-    )
-					updateMaterials();
-   });
-
-var bodyMat = new THREE.MeshStandardMaterial( { color: 0x29c3cf,  metalness: 0.8, roughness: 0.2, name: 'orange' } );;
-
-function changeColorBody(_color) {
-  bodyMat = new THREE.MeshStandardMaterial( { color: _color,  metalness: 0.8, roughness: 0.2, name: 'orange' } );
-  updateMaterials()
-}
-
-var rimMat = new THREE.MeshStandardMaterial( { color: 0x000000,  metalness: 0.8, roughness: 0.2, name: 'orange' } );
-
-function changeColorRim(_color) {
-  rimMat = new THREE.MeshStandardMaterial( { color: _color,  metalness: 0.8, roughness: 0.2, name: 'orange' } );
-  updateMaterials()
-}
-
-var leatherMat =  new THREE.MeshStandardMaterial( { color: 0x7a797a,  metalness: 0.8, roughness: 0.2, name: 'orange' } );
-
-function changeColorLeather(_color) {
-  leatherMat =  new THREE.MeshStandardMaterial( { color: _color,  metalness: 0.5, roughness: 0.2, name: 'orange' } );
-  updateMaterials()
-}
-
-var restMat = restMat = new THREE.MeshStandardMaterial( { color: 'grey',  metalness: 0.5, roughness: 0.2, name: 'orange' } );
-
-function changeColorSmall(_color) {
-  restMat = new THREE.MeshStandardMaterial( { color: _color,  metalness: 0.5, roughness: 0.2, name: 'orange' } );
-  updateMaterials()
-}
-
-var glassMat =  new THREE.MeshStandardMaterial( { color: 0x000ff0, metalness: 1, roughness: 0, opacity: 0.2, transparent: true, premultipliedAlpha: true, name: 'clear' } );
+    // Load the Orbitcontroller
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 
+    window.addEventListener('resize', function () {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      renderer.setSize(width, height)
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
 
-function updateMaterials() {
-		 carParts.body.forEach( function ( part ) { part.material = bodyMat; } );
-		 carParts.rims.forEach( function ( part ) { part.material = rimMat; } );
-		 carParts.glass.forEach( function ( part ) { part.material = glassMat; } );
-     carParts.leather.forEach( function ( part ) { part.material = leatherMat; console.log("hej")} );
-     carParts.rest.forEach( function ( part ) { part.material = restMat; } );
-	 }
+    // Load Light
+    var ambientLight = new THREE.AmbientLight(0xcccccc);
+    scene.add(ambientLight);
 
-function animate() {
-   render();
-   requestAnimationFrame( animate );
-   }
-
-function render() {
-   renderer.render( scene, camera );
-   }
-
-render();
-animate();
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 1, 1).normalize();
+    scene.add(directionalLight);
+    // Optional: Provide a DRACOLoader instance to decode compressed mesh data
 
 
-</script>
+    // glTf 2.0 Loader
+    var loader = new THREE.GLTFLoader();
+    THREE.DRACOLoader.setDecoderPath('js/three.js-master/examples/js/libs/draco/');
+    loader.setDRACOLoader(new THREE.DRACOLoader());
+
+    // Optional: Pre-fetch Draco WASM/JS module, to save time while parsing.
+    THREE.DRACOLoader.getDecoderModule();
+
+    loader.load('ferrari.glb', function (gltf) {
+      carModel = gltf.scene.children[0];
+      carModel.traverse(function (child) {
+        //if ( child.isMesh  ) {
+        //child.material.envMap = envMap;
+      });
+
+      var object = gltf.scene;
+      gltf.scene.scale.set(2, 2, 2);
+      gltf.scene.position.x = 0; //Position (x = right+ left-)
+      gltf.scene.position.y = 0; //Position (y = up+, down-)
+      gltf.scene.position.z = 0; //Position (z = front +, back-)
+
+      scene.add(gltf.scene);
+
+      // car parts for material selection
+      carParts.body.push(carModel.getObjectByName('body'));
+      carParts.rims.push(
+        carModel.getObjectByName('rim_fl'),
+        carModel.getObjectByName('rim_fr'),
+        carModel.getObjectByName('rim_rr'),
+        carModel.getObjectByName('rim_rl'),
+      );
+      carParts.glass.push(
+        carModel.getObjectByName('glass'),
+      );
+      carParts.leather.push(
+        carModel.getObjectByName('leather'),
+        carModel.getObjectByName('steering_leather'),
+      );
+      carParts.rest.push(
+        carModel.getObjectByName('trim'),
+        carModel.getObjectByName('nuts'),
+        carModel.getObjectByName('yellow_trim'),
+
+      )
+      updateMaterials();
+    });
+
+    var bodyMat = new THREE.MeshStandardMaterial({
+      color: 0x29c3cf,
+      metalness: 0.8,
+      roughness: 0.2,
+      name: 'orange'
+    });;
+
+    function changeColorBody(_color) {
+      saveToUndo();
+      bodyMat = new THREE.MeshStandardMaterial({
+        color: _color,
+        metalness: 0.8,
+        roughness: 0.2,
+        name: 'orange'
+      });
+      updateMaterials()
+    }
+
+    var rimMat = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      metalness: 0.8,
+      roughness: 0.2,
+      name: 'orange'
+    });
+
+    function changeColorRim(_color) {
+      saveToUndo();
+      rimMat = new THREE.MeshStandardMaterial({
+        color: _color,
+        metalness: 0.8,
+        roughness: 0.2,
+        name: 'orange'
+      });
+      updateMaterials()
+    }
+
+    var leatherMat = new THREE.MeshStandardMaterial({
+      color: 0x7a797a,
+      metalness: 0.8,
+      roughness: 0.2,
+      name: 'orange'
+    });
+
+    function changeColorLeather(_color) {
+      saveToUndo();
+      leatherMat = new THREE.MeshStandardMaterial({
+        color: _color,
+        metalness: 0.5,
+        roughness: 0.2,
+        name: 'orange'
+      });
+      updateMaterials()
+    }
+
+    var restMat = restMat = new THREE.MeshStandardMaterial({
+      color: 'grey',
+      metalness: 0.5,
+      roughness: 0.2,
+      name: 'orange'
+    });
+
+    function changeColorSmall(_color) {
+      saveToUndo();
+      restMat = new THREE.MeshStandardMaterial({
+        color: _color,
+        metalness: 0.5,
+        roughness: 0.2,
+        name: 'orange'
+      });
+      updateMaterials()
+    }
+
+    var glassMat = new THREE.MeshStandardMaterial({
+      color: 0x000ff0,
+      metalness: 1,
+      roughness: 0,
+      opacity: 0.2,
+      transparent: true,
+      premultipliedAlpha: true,
+      name: 'clear'
+    });
+
+
+
+    function updateMaterials() {
+      carParts.body.forEach(function (part) {
+        part.material = bodyMat;
+      });
+      carParts.rims.forEach(function (part) {
+        part.material = rimMat;
+      });
+      carParts.glass.forEach(function (part) {>
+        part.material = glassMat;
+      });
+      carParts.leather.forEach(function (part) {
+        part.material = leatherMat;
+      });
+      carParts.rest.forEach(function (part) {
+        part.material = restMat;
+      });
+    }
+
+    function animate() {
+      render();
+      requestAnimationFrame(animate);
+    }
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    saveToUndo = function () {
+      undoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
+      redoStack = [];
+    }
+
+    saveToRedo = function () {
+      redoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
+    }
+
+    updateVariables = function (variables) {
+      var _variables = variables;
+      bodyMat = _variables[0];
+      rimMat = _variables[1];
+      glassMat = _variables[2];
+      leatherMat = _variables[3];
+      restMat = _variables[4];
+    }
+
+    var undo = function () {
+      if (undoStack.length != 0) {
+        var u = undoStack.pop();
+        saveToRedo();
+        updateVariables(u);
+        updateMaterials();
+      }
+    }
+
+    var redo = function () {
+      if (redoStack.length != 0) {
+        var r = redoStack.pop();
+        saveToUndo();
+        updateVariables(r);
+        updateMaterials();
+      }
+    }
+
+    render();
+    animate();
+  </script>
 </body>
+
 </html>
