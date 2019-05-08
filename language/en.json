@@ -1,0 +1,16 @@
+{
+  "body": "Change body color",
+  "rim": "Change rim color",
+  "leather": "Change leather color",
+  "details": "Change details color",
+  "green": "Green",
+  "blue": "Blue",
+  "yellow": "Yellow",
+  "red": "Red",
+  "grey": "Grey",
+  "black": "Black",
+  "white": "White",
+  "language": "Which language do you prefer?",
+  "english": "English",
+  "swedish": "Swedish"
+}

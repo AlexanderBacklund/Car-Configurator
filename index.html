@@ -12,28 +12,68 @@
 		  <script src="js/three.js-master/examples/js/loaders/GLTFLoader.js"></script>
 		  <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
 		  <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <div class="UI">
-  <h4>Change Body color:
-  <button type="button" name="button" onclick="changeColorBody('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorBody('blue')">Blue</button>
-  <button type="button" name="button" onclick="changeColorBody('yellow')">Yellow</button>
-  <button type="button" name="button" onclick="changeColorBody('red')">Red</button>
-  </h4>
-  <h4>Change Rim color:
-  <button type="button" name="button" onclick="changeColorRim('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorRim('blue')">Blue</button>
-  <button type="button" name="button" onclick="changeColorRim('yellow')">Yellow</button>
-  <button type="button" name="button" onclick="changeColorRim('red')">Red</button>
-  <button type="button" name="button" onclick="changeColorRim('black')">black</button>
-  </h4>
-  <h4>Change Leather color:
-  <button type="button" name="button" onclick="changeColorLeather(0xffffff)">White</button>
-  <button type="button" name="button" onclick="changeColorLeather('grey')">Grey</button>
-  <button type="button" name="button" onclick="changeColorLeather(0x7a797a)">Black</button>
-  <h4>Change small things color:
-  <button type="button" name="button" onclick="changeColorSmall('green')">Green</button>
-  <button type="button" name="button" onclick="changeColorSmall('blue')">Blue</button>
+  <h4 class="body">Change body color:</h4>
+  <button type="button" name="button" class="green" onclick="changeColorBody('green')">Green</button>
+  <button type="button" name="button" class="blue" onclick="changeColorBody('blue')">Blue</button>
+  <button type="button" name="button" class="yellow" onclick="changeColorBody('yellow')">Yellow</button>
+  <button type="button" name="button" class="red" onclick="changeColorBody('red')">Red</button>
+  <h4 class="rim">Change rim color:</h4>
+  <button type="button" name="button" class="green" onclick="changeColorRim('green')">Green</button>
+  <button type="button" name="button" class="blue" onclick="changeColorRim('blue')">Blue</button>
+  <button type="button" name="button" class="yellow" onclick="changeColorRim('yellow')">Yellow</button>
+  <button type="button" name="button" class="red" onclick="changeColorRim('red')">Red</button>
+  <button type="button" name="button" class="black" onclick="changeColorRim('black')">black</button>
+  <h4 class="leather">Change leather color: </h4>
+  <button type="button" name="button" class="white" onclick="changeColorLeather(0xffffff)">White</button>
+  <button type="button" name="button" class="grey" onclick="changeColorLeather('grey')">Grey</button>
+  <button type="button" name="button" class="black" onclick="changeColorLeather(0x7a797a)">Black</button>
+  <h4 class="details">Change details color: </h4>
+  <button type="button" name="button" class="green" onclick="changeColorSmall('green')">Green</button>
+  <button type="button" name="button" class="blue" onclick="changeColorSmall('blue')">Blue</button>
 </div>
+<div>
+  <h4 class="language">Which language do you prefer?</h4>
+  <button type="button" name="button" class="english"  onclick="setLanguage('en')">English</button>
+  <button type="button" name="button" class="swedish"  onclick="setLanguage('sv')">Swedish</button>
+</div>
+
+<script>
+var language;
+function getLanguage() {
+(localStorage.getItem('language') == null) ? setLanguage('en') : false;
+$.ajax({
+url:  '/language/' +  localStorage.getItem('language') + '.json',
+dataType: 'json', async: false, dataType: 'json',
+success: function (lang) { language = lang } });
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  changeLang();
+}
+
+function changeLang(){
+  getLanguage();
+  $('.body').text(language.body);
+  $('.rim').text(language.rim);
+  $('.leather').text(language.leather);
+  $('.details').text(language.details);
+  $('.green').text(language.green);
+  $('.blue').text(language.blue);
+  $('.yellow').text(language.yellow);
+  $('.red').text(language.red);
+  $('.black').text(language.black);
+  $('.grey').text(language.grey);
+  $('.white').text(language.white);
+  $('.language').text(language.language);
+  $('.english').text(language.english);
+  $('.swedish').text(language.swedish);
+}
+
+</script>
+
 <script>
 
 // Load 3D Scene
@@ -164,7 +204,7 @@ function updateMaterials() {
 		 carParts.body.forEach( function ( part ) { part.material = bodyMat; } );
 		 carParts.rims.forEach( function ( part ) { part.material = rimMat; } );
 		 carParts.glass.forEach( function ( part ) { part.material = glassMat; } );
-     carParts.leather.forEach( function ( part ) { part.material = leatherMat; console.log("hej")} );
+     carParts.leather.forEach( function ( part ) { part.material = leatherMat} );
      carParts.rest.forEach( function ( part ) { part.material = restMat; } );
 	 }
 
