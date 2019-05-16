@@ -94,8 +94,9 @@
       );
       carParts.rest.push(
         carModel.getObjectByName('trim'),
-        carModel.getObjectByName('nuts'),
         carModel.getObjectByName('yellow_trim'),
+        carModel.getObjectByName('steering_trim'),
+
 
       )
       updateMaterials();
