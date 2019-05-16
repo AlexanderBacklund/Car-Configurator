@@ -15,5 +15,7 @@
   "swedish": "Svenska",
   "undoredo": "Ångra, göra om",
   "undo": "Ångra",
-  "redo": "Göra om"
+  "redo": "Göra om",
+  "instructions": "Instruktioner",
+  "modal": "hej"
 }

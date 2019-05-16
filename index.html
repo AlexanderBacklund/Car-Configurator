@@ -29,58 +29,95 @@
 
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
+      <link type="text/css" rel="stylesheet" href="css/modal.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-
     <div class="row">
-
-    <div class="col s4">
+    <div class="col s12 m4">
       <h4 class="body">Change body color:</h4>
       <button type="button" name="button" class="green" onclick="changeColorBody('green')">Green</button>
       <button type="button" name="button" class="blue" onclick="changeColorBody('blue')">Blue</button>
       <button type="button" name="button" class="yellow" onclick="changeColorBody('yellow')">Yellow</button>
       <button type="button" name="button" class="red" onclick="changeColorBody('red')">Red</button>
     </div>
-    <div class="col s4">
 
-    <h4 class="rim">Change rim color:</h4>
-    <button type="button" name="button" class="green" onclick="changeColorRim('green')">Green</button>
-    <button type="button" name="button" class="blue" onclick="changeColorRim('blue')">Blue</button>
-    <button type="button" name="button" class="yellow" onclick="changeColorRim('yellow')">Yellow</button>
-    <button type="button" name="button" class="red" onclick="changeColorRim('red')">Red</button>
-    <button type="button" name="button" class="black" onclick="changeColorRim('black')">black</button>
-  </div>
-  <div class="col s4">
+    <div class="col s12 m4">
+      <h4 class="rim">Change rim color:</h4>
+      <button type="button" name="button" class="green" onclick="changeColorRim('green')">Green</button>
+      <button type="button" name="button" class="blue" onclick="changeColorRim('blue')">Blue</button>
+      <button type="button" name="button" class="yellow" onclick="changeColorRim('yellow')">Yellow</button>
+      <button type="button" name="button" class="red" onclick="changeColorRim('red')">Red</button>
+      <button type="button" name="button" class="black" onclick="changeColorRim('black')">black</button>
+    </div>
 
-    <h4 class="leather">Change leather color: </h4>
-    <button type="button" name="button" class="white" onclick="changeColorLeather(0xffffff)">White</button>
-    <button type="button" name="button" class="grey" onclick="changeColorLeather('grey')">Grey</button>
-    <button type="button" name="button" class="black" onclick="changeColorLeather(0x7a797a)">Black</button>
+    <div class="col s12 m4">
+      <h4 class="leather">Change leather color: </h4>
+      <button type="button" name="button" class="white" onclick="changeColorLeather(0xffffff)">White</button>
+      <button type="button" name="button" class="grey" onclick="changeColorLeather('grey')">Grey</button>
+      <button type="button" name="button" class="black" onclick="changeColorLeather(0x7a797a)">Black</button>
+    </div>
+
+    <div class="col s12 m4">
+      <h4 class="details">Change details color: </h4>
+      <button type="button" name="button" class="green" onclick="changeColorSmall('green')">Green</button>
+      <button type="button" name="button" class="blue" onclick="changeColorSmall('blue')">Blue</button>
+    </div>
+
+    <div class="col s12 m4">
+      <h4 class="language">Which language do you prefer?</h4>
+      <button type="button" name="button" class="english" onclick="setLanguage('en')">English</button>
+      <button type="button" name="button" class="swedish" onclick="setLanguage('sv')">Swedish</button>
+    </div>
+
+    <div class="col s12 m4">
+      <h4 class="undoredo">Undo Redo:</h4>
+      <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
+      <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
+    </div>
   </div>
-<div class="col s4">
-    <h4 class="details">Change details color: </h4>
-    <button type="button" name="button" class="green" onclick="changeColorSmall('green')">Green</button>
-    <button type="button" name="button" class="blue" onclick="changeColorSmall('blue')">Blue</button>
+
+   <!-- Trigger/Open The Modal -->
+   <button id="myBtn" class="instructions">Instructions</button>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p class="modal"></p>
   </div>
-  <div class="col s4">
-    <h4 class="language">Which language do you prefer?</h4>
-    <button type="button" name="button" class="english" onclick="setLanguage('en')">English</button>
-    <button type="button" name="button" class="swedish" onclick="setLanguage('sv')">Swedish</button>
-  </div>
-  <div class="col s4">
-    <h4 class="undoredo">Undo Redo:</h4>
-    <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
-    <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
-  </div>
+
 </div>
-
-
 <div >
 
+  <script>
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+  </script>
 
   <script>
     var language;
@@ -122,6 +159,7 @@
       $('.undo').text(language.undo);
       $('.redo').text(language.redo);
       $('.undoredo').text(language.undoredo);
+      $('.instructions').text(language.instructions)
     }
   </script>
 
@@ -224,7 +262,7 @@
     });
 
     var bodyMat = new THREE.MeshStandardMaterial({
-      color: 0x29c3cf,
+      color: 'red',
       metalness: 0.8,
       roughness: 0.2,
       name: 'orange'
