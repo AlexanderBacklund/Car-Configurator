@@ -22,6 +22,7 @@
     <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -74,15 +75,16 @@
     </div>
 
     <div class="col s12 m4">
-      <h4 class="undoredo">Undo, redo</h4>
-      <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
-      <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
+      <h4 class="undoredo">Undo Redo:</h4>
+      <button type="button" name="button" class="undo" onclick="undo()"><i class="material-icons">undo</i></button>
+      <button type="button" name="button" class="redo" onclick="redo()"><i class="material-icons">redo</i></button>
+      <button onclick="topFunction()" title="Go to top">Top</button>
     </div>
   </div>
 <div>
 
    <!-- Trigger/Open The Modal -->
-   <button id="myBtn" class="instructions">Instructions</button>
+   <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
   <!-- The Modal -->
   <div id="myModal" class="modal">
       <!-- Modal content -->
