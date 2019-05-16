@@ -46,7 +46,7 @@
       <button type="button" name="button" class="red" onclick="changeColorBody('red')">Red</button>
     </div>
     <div class="col s4">
-
+      
     <h4 class="rim">Change rim color:</h4>
     <button type="button" name="button" class="green" onclick="changeColorRim('green')">Green</button>
     <button type="button" name="button" class="blue" onclick="changeColorRim('blue')">Blue</button>
@@ -68,13 +68,13 @@
   </div>
   <div class="col s4">
     <h4 class="language">Which language do you prefer?</h4>
-    <button type="button" name="button" class="english"  onclick="setLanguage('en')">English</button>
-    <button type="button" name="button" class="swedish"  onclick="setLanguage('sv')">Swedish</button>
+    <button type="button" name="button" class="english" onclick="setLanguage('en')">English</button>
+    <button type="button" name="button" class="swedish" onclick="setLanguage('sv')">Swedish</button>
   </div>
   <div class="col s4">
     <h4 class="undoredo">Undo Redo:</h4>
-      <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
-      <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
+    <button type="button" name="button" class="undo" onclick="undo()">Undo</button>
+    <button type="button" name="button" class="redo" onclick="redo()">Redo</button>
   </div>
 </div>
 
@@ -82,42 +82,48 @@
 <div >
 
 
-<script>
-  var language;
-  function getLanguage() {
-  (localStorage.getItem('language') == null) ? setLanguage('en') : false;
-  $.ajax({
-  url:  '/language/' +  localStorage.getItem('language') + '.json',
-  dataType: 'json', async: false, dataType: 'json',
-  success: function (lang) { language = lang } });
-  }
+  <script>
+    var language;
 
-  function setLanguage(lang) {
-    localStorage.setItem('language', lang);
-    changeLang();
-  }
+    function getLanguage() {
+      (localStorage.getItem('language') == null) ? setLanguage('en'): false;
+      $.ajax({
+        url: '/language/' + localStorage.getItem('language') + '.json',
+        dataType: 'json',
+        async: false,
+        dataType: 'json',
+        success: function (lang) {
+          language = lang
+        }
+      });
+    }
 
-  function changeLang(){
-    getLanguage();
-    $('.body').text(language.body);
-    $('.rim').text(language.rim);
-    $('.leather').text(language.leather);
-    $('.details').text(language.details);
-    $('.green').text(language.green);
-    $('.blue').text(language.blue);
-    $('.yellow').text(language.yellow);
-    $('.red').text(language.red);
-    $('.black').text(language.black);
-    $('.grey').text(language.grey);
-    $('.white').text(language.white);
-    $('.language').text(language.language);
-    $('.english').text(language.english);
-    $('.swedish').text(language.swedish);
-    $('.undo').text(language.undo);
-    $('.redo').text(language.redo);
-    $('.undoredo').text(language.undoredo);
-  }
-</script>
+    function setLanguage(lang) {
+      localStorage.setItem('language', lang);
+      changeLang();
+    }
+
+    function changeLang() {
+      getLanguage();
+      $('.body').text(language.body);
+      $('.rim').text(language.rim);
+      $('.leather').text(language.leather);
+      $('.details').text(language.details);
+      $('.green').text(language.green);
+      $('.blue').text(language.blue);
+      $('.yellow').text(language.yellow);
+      $('.red').text(language.red);
+      $('.black').text(language.black);
+      $('.grey').text(language.grey);
+      $('.white').text(language.white);
+      $('.language').text(language.language);
+      $('.english').text(language.english);
+      $('.swedish').text(language.swedish);
+      $('.undo').text(language.undo);
+      $('.redo').text(language.redo);
+      $('.undoredo').text(language.undoredo);
+    }
+  </script>
 
   <script>
     // Load 3D Scene
@@ -358,7 +364,7 @@
     var redo = function () {
       if (redoStack.length != 0) {
         var r = redoStack.pop();
-        saveToUndo();
+        undoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
         updateVariables(r);
         updateMaterials();
       }
