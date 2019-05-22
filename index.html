@@ -71,136 +71,13 @@
       </div>
       <div class="col s4">
         <h4 class="undoredo"></h4>
-        <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black" onclick="undo()">Undo</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black" onclick="redo()">Redo</button>
+        <button type="button" name="button" class="undo" onclick="undo()"><i class="material-icons">undo</i></button>
+        <button type="button" name="button" class="redo" onclick="redo()"><i class="material-icons">redo</i></button>
+        <button onclick="topFunction()" title="Go to top">Top</button>
       </div>
     </div>
   </div>
       <canvas id="c"></canvas>
-    
-
-</body>
-
-
-  <script>
-    var language;
-
-    function getLanguage() {
-      (localStorage.getItem('language') == null) ? setLanguage('en'): false;
-      $.ajax({
-        url: '/language/' + localStorage.getItem('language') + '.json',
-        dataType: 'json',
-        async: false,
-        dataType: 'json',
-        success: function (lang) {
-          language = lang
-        }
-      });
-    }
-
-    function setLanguage(lang) {
-      localStorage.setItem('language', lang);
-      changeLang();
-    }
-
-    function changeLang() {
-      getLanguage();
-      $('.body').text(language.body);
-      $('.rim').text(language.rim);
-      $('.leather').text(language.leather);
-      $('.details').text(language.details);
-      $('.green').text(language.green);
-      $('.blue').text(language.blue);
-      $('.yellow').text(language.yellow);
-      $('.red').text(language.red);
-      $('.black').text(language.black);
-      $('.grey').text(language.grey);
-      $('.white').text(language.white);
-      $('.language').text(language.language);
-      $('.english').text(language.english);
-      $('.swedish').text(language.swedish);
-      $('.undo').text(language.undo);
-      $('.redo').text(language.redo);
-      $('.undoredo').text(language.undoredo);
-    }
-  </script>
-
-  <script>
-    // Load 3D Scene
-    
-    container = document.createElement('div');
-		document.body.appendChild(container);
-
-    var scene = new THREE.Scene();
-
-    undoStack = [];
-    redoStack = [];
-
-    var carParts = {
-      body: [],
-      rims: [],
-      glass: [],
-      leather: [],
-      rest: []
-    };
-    var carModel;
-
-    // Load Camera Perspektive
-    var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 20000);
-    camera.position.set(-15, 9, 15);
-
-    // Load a Renderer
-    var renderer = new THREE.WebGLRenderer({
-      alpha: false
-    });
-    renderer.setClearColor(0xE0E0E0);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // Load the Orbitcontroller
-    var controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-
-    window.addEventListener('resize', function () {
-      var width = window.innerWidth * .8;
-      var height = window.innerHeight;
-      renderer.setSize(width, height)
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    });
-
-    // Load Light
-    var ambientLight = new THREE.AmbientLight(0xcccccc);
-    scene.add(ambientLight);
-
-    var directionalLight = new THREE.DirectionalLight(0xffffff);
-    directionalLight.position.set(0, 1, 1).normalize();
-    scene.add(directionalLight);
-    // Optional: Provide a DRACOLoader instance to decode compressed mesh data
-
-
-    // glTf 2.0 Loader
-    var loader = new THREE.GLTFLoader();
-    THREE.DRACOLoader.setDecoderPath('js/three.js-master/examples/js/libs/draco/');
-    loader.setDRACOLoader(new THREE.DRACOLoader());
-
-    // Optional: Pre-fetch Draco WASM/JS module, to save time while parsing.
-    THREE.DRACOLoader.getDecoderModule();
-
-    loader.load('ferrari.glb', function (gltf) {
-      carModel = gltf.scene.children[0];
-      carModel.traverse(function (child) {
-        //if ( child.isMesh  ) {
-        //child.material.envMap = envMap;
-      });
-
-      var object = gltf.scene;
-      gltf.scene.scale.set(2, 2, 2);
-      gltf.scene.position.x = 0; //Position (x = right+ left-)
-      gltf.scene.position.y = 0.5; //Position (y = up+, down-)
-      gltf.scene.position.z = 0; //Position (z = front +, back-)
-
 
    <!-- Trigger/Open The Modal -->
    <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
