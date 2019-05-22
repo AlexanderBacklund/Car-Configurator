@@ -11,7 +11,10 @@
     <script src="js/three.js-master/examples/js/loaders/GLTFLoader.js"></script>
     <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
     <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -20,13 +23,10 @@
 
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
+      <link type="text/css" rel="stylesheet" href="css/modal.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
 
 
     <div class="changerowcontainer">
@@ -201,186 +201,29 @@
       gltf.scene.position.y = 0.5; //Position (y = up+, down-)
       gltf.scene.position.z = 0; //Position (z = front +, back-)
 
-      scene.add(gltf.scene);
 
-      // car parts for material selection
-      carParts.body.push(carModel.getObjectByName('body'));
-      carParts.rims.push(
-        carModel.getObjectByName('rim_fl'),
-        carModel.getObjectByName('rim_fr'),
-        carModel.getObjectByName('rim_rr'),
-        carModel.getObjectByName('rim_rl'),
-      );
-      carParts.glass.push(
-        carModel.getObjectByName('glass'),
-      );
-      carParts.leather.push(
-        carModel.getObjectByName('leather'),
-        carModel.getObjectByName('steering_leather'),
-      );
-      carParts.rest.push(
-        carModel.getObjectByName('trim'),
-        carModel.getObjectByName('nuts'),
-        carModel.getObjectByName('yellow_trim'),
-
-      )
-      updateMaterials();
-    });
-
-    var bodyMat = new THREE.MeshStandardMaterial({
-      color: 0x29c3cf,
-      metalness: 0.8,
-      roughness: 0.2,
-      name: 'orange'
-    });;
-
-    function changeColorBody(_color) {
-      saveToUndo();
-      bodyMat = new THREE.MeshStandardMaterial({
-        color: _color,
-        metalness: 0.8,
-        roughness: 0.2,
-        name: 'orange'
-      });
-      updateMaterials()
-    }
-
-    var rimMat = new THREE.MeshStandardMaterial({
-      color: 0x000000,
-      metalness: 0.8,
-      roughness: 0.2,
-      name: 'orange'
-    });
-
-    function changeColorRim(_color) {
-      saveToUndo();
-      rimMat = new THREE.MeshStandardMaterial({
-        color: _color,
-        metalness: 0.8,
-        roughness: 0.2,
-        name: 'orange'
-      });
-      updateMaterials()
-    }
-
-    var leatherMat = new THREE.MeshStandardMaterial({
-      color: 0x7a797a,
-      metalness: 0.8,
-      roughness: 0.2,
-      name: 'orange'
-    });
-
-    function changeColorLeather(_color) {
-      saveToUndo();
-      leatherMat = new THREE.MeshStandardMaterial({
-        color: _color,
-        metalness: 0.5,
-        roughness: 0.2,
-        name: 'orange'
-      });
-      updateMaterials()
-    }
-
-    var restMat = restMat = new THREE.MeshStandardMaterial({
-      color: 'grey',
-      metalness: 0.5,
-      roughness: 0.2,
-      name: 'orange'
-    });
-
-    function changeColorSmall(_color) {
-      saveToUndo();
-      restMat = new THREE.MeshStandardMaterial({
-        color: _color,
-        metalness: 0.5,
-        roughness: 0.2,
-        name: 'orange'
-      });
-      updateMaterials()
-    }
-
-    var glassMat = new THREE.MeshStandardMaterial({
-      color: 0x000ff0,
-      metalness: 1,
-      roughness: 0,
-      opacity: 0.2,
-      transparent: true,
-      premultipliedAlpha: true,
-      name: 'clear'
-    });
-
-
-
-    function updateMaterials() {
-      carParts.body.forEach(function (part) {
-        part.material = bodyMat;
-      });
-      carParts.rims.forEach(function (part) {
-        part.material = rimMat;
-      });
-      carParts.glass.forEach(function (part) {
-        part.material = glassMat;
-      });
-      carParts.leather.forEach(function (part) {
-        part.material = leatherMat;
-      });
-      carParts.rest.forEach(function (part) {
-        part.material = restMat;
-      });
-    }
-
-    function animate() {
-      render();
-      requestAnimationFrame(animate);
-    }
-
-    function render() {
-      renderer.render(scene, camera);
-    }
-
-    saveToUndo = function () {
-      undoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
-      redoStack = [];
-    }
-
-    saveToRedo = function () {
-      redoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
-    }
-
-    updateVariables = function (variables) {
-      var _variables = variables;
-      bodyMat = _variables[0];
-      rimMat = _variables[1];
-      glassMat = _variables[2];
-      leatherMat = _variables[3];
-      restMat = _variables[4];
-    }
-
-    var undo = function () {
-      if (undoStack.length != 0) {
-        var u = undoStack.pop();
-        saveToRedo();
-        updateVariables(u);
-        updateMaterials();
-      }
-    }
-
-    var redo = function () {
-      if (redoStack.length != 0) {
-        var r = redoStack.pop();
-        undoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
-        updateVariables(r);
-        updateMaterials();
-      }
-    }
-
-    render();
-    animate();
-  </script>
+   <!-- Trigger/Open The Modal -->
+   <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+      <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h4 class="modal-welcome">Welcome to Car Configurator</h4>
+    <p class="modal-text">Here you have the chance to visualize your dream car. We have lots of colors to choose from. Click on the color you like best and check the car when it gets your newly chosen color.</p>
+  </div>
   </div>
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+</div>
+  <!-- Importing the modal script -->
+  <script src="js/modal.js"></script>
+
+  <!-- Importing the language script -->
+  <script src="js/language.js"></script>
+
+  <!-- importing the model -->
+  <script src="js/car.js"></script>
+
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 {
-  "body": "Ändra karossens färg",
-  "rim": "Ändra fälgens färg",
-  "leather": "Ändra lädrets färg",
-  "details": "Ändra detaljernas färg",
+  "body": "Ändra karossens färg:",
+  "rim": "Ändra fälgens färg:",
+  "leather": "Ändra lädrets färg:",
+  "details": "Ändra detaljernas färg:",
   "green": "Grön",
   "blue": "Blå",
   "yellow": "Gul",
@@ -15,5 +15,8 @@
   "swedish": "Svenska",
   "undoredo": "Ångra, göra om",
   "undo": "Ångra",
-  "redo": "Göra om"
+  "redo": "Göra om",
+  "instructions": "Instruktioner",
+  "modalWelcome": "Välkommen till Car Configurator",
+  "modalText": "Här har du chansen att visualisera din dröm bil. vi har massor av färger att välja mellan. Klicka på den färg du tycker bäst om och kolla på bilen när den får din nyvalda färg."
 }
