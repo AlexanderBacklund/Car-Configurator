@@ -34,10 +34,6 @@ function changeLang() {
   $('.language').text(language.language);
   $('.english').text(language.english);
   $('.swedish').text(language.swedish);
-  $('.undo').text(language.undo);
-  $('.redo').text(language.redo);
-  $('.undoredo').text(language.undoredo);
-  $('.instructions').text(language.instructions)
   $('.modal-welcome').text(language.modalWelcome)
   $('.modal-text').text(language.modalText)
 }
