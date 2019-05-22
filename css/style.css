@@ -19,6 +19,10 @@ canvas {
 .changerowcontainer {
     position: absolute;
     bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 
 }
 
@@ -40,13 +44,45 @@ canvas {
         flex-direction: column;
         align-items: flex-end;
         text-align: center;
-        margin-right: 10px;
+        margin-right: 20px;
     }
 
-    .btn-small {
-        margin: 4px;
-        width: 90px;
-        height: 4vh;
+
+    #colorbtn {
+        width: 80px;
+        margin: 3px;
+    }
+
+    #undoredobtn {
+        background-color: transparent;
+        border: none;
+    }
+
+    #undoredobtn:active {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    .undoredobtn {
+        background-color: transparent;
+        border: none;
+    }
+
+    .undoredobtn:active {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    .undoredobtn:focus {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    #langbtn {
+        margin: 3px;
     }
 
     .row .col {
@@ -55,4 +91,8 @@ canvas {
 
     .row {
         margin-bottom: 0 !important;
+    }
+
+    .material-icons { 
+        font-size: 40px !important;
     }
