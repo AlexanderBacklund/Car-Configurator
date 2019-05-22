@@ -15,7 +15,8 @@
       rims: [],
       glass: [],
       leather: [],
-      rest: []
+      rest: [],
+      lights: [],
     };
     var carModel;
 
@@ -96,9 +97,12 @@
         carModel.getObjectByName('trim'),
         carModel.getObjectByName('yellow_trim'),
         carModel.getObjectByName('steering_trim'),
-
+      );
+      carParts.lights.push(
+        carModel.getObjectByName('brakes'),
 
       )
+
       updateMaterials();
     });
 
