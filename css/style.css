@@ -49,8 +49,10 @@ canvas {
 
 
     #colorbtn {
-        width: 80px;
+        width: 70px;
         margin: 3px;
+        font-size: 10zpx;
+        text-align: center;
     }
 
     #undoredobtn {
