@@ -12,89 +12,106 @@
     <script src="js/three.js-master/examples/js/loaders/DRACOLoader.js"></script>
     <script src="js/three.js-master/examples/js/controls/OrbitControls.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <link type="text/css" rel="stylesheet" href="css/modal.css"  media="screen,projection"/>
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link type="text/css" rel="stylesheet" href="css/modal.css" media="screen,projection" />
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
+  <div id="hide">
+  </div>
     <div class="changerowcontainer">
-    <div class="row" id="changerow">
+      <div class="row" id="changerow">
         <canvas> </canvas>
-        <div class="col s4">
+        <div id="bodyDiv" class="col s4">
           <h4 class="body">Body color</h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light green" onclick="changeColorBody('green')">Green</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  blue" onclick="changeColorBody('blue')">Blue</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  yellow" onclick="changeColorBody('yellow')">Yellow</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  red" onclick="changeColorBody('red')">Red</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light green"
+            onclick="changeColorBody('green')">Green</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
+            onclick="changeColorBody('blue')">Blue</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  yellow"
+            onclick="changeColorBody('yellow')">Yellow</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  red"
+            onclick="changeColorBody('red')">Red</button>
         </div>
         <div class="col s4">
 
-        <h4 class="rim">Rim color</h4>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  green" onclick="changeColorRim('green')">Green</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  blue" onclick="changeColorRim('blue')">Blue</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  yellow" onclick="changeColorRim('yellow')">Yellow</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  red" onclick="changeColorRim('red')">Red</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  black" onclick="changeColorRim('black')">black</button>
-      </div>
-      <div class="col s4">
+          <h4 class="rim">Rim color</h4>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  green"
+            onclick="changeColorRim('green')">Green</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
+            onclick="changeColorRim('blue')">Blue</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  yellow"
+            onclick="changeColorRim('yellow')">Yellow</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  red"
+            onclick="changeColorRim('red')">Red</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  black"
+            onclick="changeColorRim('black')">black</button>
+        </div>
+        <div class="col s4">
 
-        <h4 class="leather">Leather color </h4>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  white" style="color: black" onclick="changeColorLeather(0xffffff)">White</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  grey" onclick="changeColorLeather('grey')">Grey</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  black" onclick="changeColorLeather(0x7a797a)">Black</button>
-      </div>
-    <div class="col s4">
-        <h4 class="details">Details color </h4>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  green" onclick="changeColorSmall('green')">Green</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light  blue" onclick="changeColorSmall('blue')">Blue</button>
+          <h4 class="leather">Leather color </h4>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  white" style="color: black"
+            onclick="changeColorLeather(0xffffff)">White</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  grey"
+            onclick="changeColorLeather('grey')">Grey</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  black"
+            onclick="changeColorLeather(0x7a797a)">Black</button>
+        </div>
+        <div class="col s4">
+          <h4 class="details">Details color </h4>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  green"
+            onclick="changeColorSmall('green')">Green</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
+            onclick="changeColorSmall('blue')">Blue</button>
+        </div>
       </div>
     </div>
-  </div>
     <div id="langundoredobuttonscontainer">
       <div id="langundoredobuttons">
-      <div class="col s4">
-        <h4 class="language"></h4>
-        <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black" onclick="setLanguage('en')">English</button>
-        <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black" onclick="setLanguage('sv')">Swedish</button>
+        <div class="col s4">
+          <h4 class="language"></h4>
+          <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black"
+            onclick="setLanguage('en')">English</button>
+          <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black"
+            onclick="setLanguage('sv')">Swedish</button>
+        </div>
+        <div class="col s4">
+          <h4 class="undoredo"></h4>
+          <button type="button" name="button" class="undo" onclick="undo()"><i class="material-icons">undo</i></button>
+          <button type="button" name="button" class="redo" onclick="redo()"><i class="material-icons">redo</i></button>
+          <button onclick="topFunction()" title="Go to top">Top</button>
+        </div>
       </div>
-      <div class="col s4">
-        <h4 class="undoredo"></h4>
-        <button type="button" name="button" class="undo" onclick="undo()"><i class="material-icons">undo</i></button>
-        <button type="button" name="button" class="redo" onclick="redo()"><i class="material-icons">redo</i></button>
-        <button onclick="topFunction()" title="Go to top">Top</button>
+    </div>
+    <canvas id="c"></canvas>
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4 class="modal-welcome">Welcome to Car Configurator</h4>
+        <p class="modal-text">Here you have the chance to visualize your dream car. We have lots of colors to choose
+          from. Click on the color you like best and check the car when it gets your newly chosen color.</p>
+          <button id="next" class="btn" onclick="goNext()">Next</button>
       </div>
     </div>
   </div>
-      <canvas id="c"></canvas>
-
-   <!-- Trigger/Open The Modal -->
-   <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-      <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h4 class="modal-welcome">Welcome to Car Configurator</h4>
-    <p class="modal-text">Here you have the chance to visualize your dream car. We have lots of colors to choose from. Click on the color you like best and check the car when it gets your newly chosen color.</p>
-  </div>
-  </div>
-
-</div>
-<embed src="havet-ar-djupt.mp3" autostart="true" loop="true"
-width="2" height="0">
-</embed>
+  <embed src="havet-ar-djupt.mp3" autostart="true" loop="true" width="2" height="0">
+  </embed>
   <!-- Importing the modal script -->
   <script src="js/modal.js"></script>
 
