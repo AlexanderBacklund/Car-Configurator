@@ -7,5 +7,7 @@ Download the whole folder and start the index.html file in your browser.
 
 ## Contributors
 Alexander Backlund - AlexanderBacklund
+
 Jakob Halldin - Herrdin
+
 Axel Nygrårds - Nygards
