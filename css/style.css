@@ -1,17 +1,17 @@
-body { 
-    margin: 0; 
+body {
+    margin: 0;
 }
 
 h4 {
     font-size: 15px !important;
 }
 
-canvas { 
-    width: 100% !important; 
-    height: 100% !important; 
-    background-color: white; 
-    z-index: -50 !important; 
-    position: fixed; 
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: white;
+    z-index: -50 !important;
+    position: fixed;
     right: 0;
     top: 0;
 }
@@ -31,12 +31,11 @@ canvas {
         justify-content: center;
         text-align: center;
         padding-bottom: 20px;
-
         background-color: rgb(rgb(224,224,224, 0,8));
         padding-left: 2vh;
         padding-right: 2vh;
         top: 0;
-        
+
     }
 
     #langundoredobuttonscontainer {
@@ -95,10 +94,15 @@ canvas {
         margin-bottom: 0 !important;
     }
 
-    .material-icons { 
+    .material-icons {
         font-size: 36px !important;
     }
 
     #myBtn {
-        
+
+    }
+
+    #songbtn {
+      background: rgba(255, 255, 255, 0) !important;
+      margin: 0;
     }
