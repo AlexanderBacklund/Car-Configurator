@@ -25,8 +25,8 @@ function changeLang() {
   $('.leather').text(language.leather);
   $('.details').text(language.details);
   $('.green').text(language.green);
-  $('.blue').text(language.blue);
-  $('.yellow').text(language.yellow);
+  $('.blueLang').text(language.blue);
+  $('.yellowLang').text(language.yellow);
   $('.red').text(language.red);
   $('.black').text(language.black);
   $('.grey').text(language.grey);
