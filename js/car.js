@@ -21,22 +21,28 @@
     var carModel;
 
     // Load Camera Perspektive
+    // field of view 25%, aspect = width/height, near = from start to field of view, far = from start to end
+    // camera position
     var camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 20000);
     camera.position.set(-15, 9, 15);
 
     // Load a Renderer
+    // Loads our render. We use WebGLRender because it let us use the GPU
+    // This also creates a canvas tag rendered inside body
     var renderer = new THREE.WebGLRenderer({
       alpha: false
     });
+    // sets the background color
     renderer.setClearColor(0xC5C5C3);
+
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Load the Orbitcontroller
+    // Load the Orbitcontroller, used to rotate the car  
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-
+    // updateProjectionMatrix used to resize the the browser
     window.addEventListener('resize', function () {
       var width = window.innerWidth;
       var height = window.innerHeight;
@@ -46,9 +52,13 @@
     });
 
     // Load Light
+    // we need light in order to see the the 3D model 
+    // ambientLight light globally all objects equally
     var ambientLight = new THREE.AmbientLight(0xcccccc);
     scene.add(ambientLight);
 
+    // Light in a specific direction
+    // often used to simulate daylight
     var directionalLight = new THREE.DirectionalLight(0xffffff);
     directionalLight.position.set(0, 1, 1).normalize();
     scene.add(directionalLight);
@@ -56,13 +66,17 @@
 
 
     // glTf 2.0 Loader
+    // GL Transmission Format is an open format specification 
+    // for efficient delivery and loading of 3D content either in json or binary format
     var loader = new THREE.GLTFLoader();
+    // Draco used to compress and decompress the data
     THREE.DRACOLoader.setDecoderPath('js/three.js-master/examples/js/libs/draco/');
     loader.setDRACOLoader(new THREE.DRACOLoader());
 
     // Optional: Pre-fetch Draco WASM/JS module, to save time while parsing.
     THREE.DRACOLoader.getDecoderModule();
 
+    //Traverse through the model file
     loader.load('ferrari.glb', function (gltf) {
       carModel = gltf.scene.children[0];
       carModel.traverse(function (child) {
