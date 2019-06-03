@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+}
+
+h4 {
+    font-size: 15px !important;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: white;
+    z-index: -50 !important;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.changerowcontainer {
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+}
+
+#changerow {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(224,224,224, 0,8);
+    padding-bottom: 20px;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    top: 0;
+
+    }
+
+#langundoredobuttonscontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: center;
+    margin-right: 20px;
+}
+
+
+    #colorbtn {
+        width: 70px;
+        margin: 3px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    #undoredobtn {
+        background-color: transparent;
+        border: none;
+    }
+
+    #undoredobtn:active {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    .undoredobtn {
+        background-color: transparent;
+        border: none;
+    }
+
+    .undoredobtn:active {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    .undoredobtn:focus {
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    #langbtn {
+        margin: 3px;
+    }
+
+    .row .col {
+        padding: 0 !important;
+    }
+
+    .row {
+        margin-bottom: 0 !important;
+    }
+
+    .material-icons {
+        font-size: 36px !important;
+    }
+
+    #myBtn {
+
+    }

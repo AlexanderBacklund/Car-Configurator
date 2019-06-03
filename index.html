@@ -3,7 +3,7 @@
 
 <head>
   <title>Car config</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -35,78 +35,64 @@
         <canvas> </canvas>
         <div id="bodyDiv" class="col s4">
           <h4 class="body">Body color</h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light green"
-            onclick="changeColorBody('green')">Green</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
-            onclick="changeColorBody('blue')">Blue</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  yellow"
-            onclick="changeColorBody('yellow')">Yellow</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  red"
-            onclick="changeColorBody('red')">Red</button>
+          <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light green darken-4" onclick="changeColorBody('green')">Green</button>
+          <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light blueLang indigo darken-3" onclick="changeColorBody('blue')">Blue</button>
+          <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light yellowLang lime darken-3" onclick="changeColorBody('yellow')">Yellow</button>
+          <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  red darken-4" onclick="changeColorBody('red')">Red</button>
         </div>
-        <div class="col s4">
+        <div id="rimDiv"class="col s4">
 
-          <h4 class="rim">Rim color</h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  green"
-            onclick="changeColorRim('green')">Green</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
-            onclick="changeColorRim('blue')">Blue</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  yellow"
-            onclick="changeColorRim('yellow')">Yellow</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  red"
-            onclick="changeColorRim('red')">Red</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  black"
-            onclick="changeColorRim('black')">black</button>
-        </div>
-        <div class="col s4">
+        <h4  class="rim">Rim color</h4>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  green darken-4" onclick="changeColorRim('green')">Green</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  blueLang indigo darken-3" onclick="changeColorRim('blue')">Blue</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light yellowLang lime darken-3" onclick="changeColorRim('yellow')">Yellow</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  red darken-4" onclick="changeColorRim('red')">Red</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  black" onclick="changeColorRim('black')">black</button>
+      </div>
+      <div id="leatherDiv" class="col s4">
 
-          <h4 class="leather">Leather color </h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  white" style="color: black"
-            onclick="changeColorLeather(0xffffff)">White</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  grey"
-            onclick="changeColorLeather('grey')">Grey</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  black"
-            onclick="changeColorLeather(0x7a797a)">Black</button>
-        </div>
-        <div class="col s4">
-          <h4 class="details">Details color </h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  green"
-            onclick="changeColorSmall('green')">Green</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light  blue"
-            onclick="changeColorSmall('blue')">Blue</button>
-        </div>
+        <h4 class="leather">Leather color </h4>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  white whitecolor" style="color: black" onclick="changeColorLeather(0xffffff)">White</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  grey" onclick="changeColorLeather('grey')">Grey</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  black" onclick="changeColorLeather(0x7a797a)">Black</button>
+      </div>
+    <div id="detailsDiv" class="col s4">
+        <h4  class="details">Details color </h4>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light  green darken-4" onclick="changeColorSmall('green')">Green</button>
+        <button type="button" id="colorbtn" name="button" class="btn-small waves-effect waves-light blueLang indigo darken-3" onclick="changeColorSmall('blue')">Blue</button>
       </div>
     </div>
     <div id="langundoredobuttonscontainer">
       <div id="langundoredobuttons">
-        <div class="col s4">
-          <h4 class="language"></h4>
-          <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black"
-            onclick="setLanguage('en')">English</button>
-          <button type="button" name="button" class="btn-small waves-effect waves-light white" style="color: black"
-            onclick="setLanguage('sv')">Swedish</button>
-        </div>
-        <div class="col s4">
-          <h4 class="undoredo"></h4>
-          <button type="button" name="button" class="undo" onclick="undo()"><i class="material-icons">undo</i></button>
-          <button type="button" name="button" class="redo" onclick="redo()"><i class="material-icons">redo</i></button>
-          <button onclick="topFunction()" title="Go to top">Top</button>
-        </div>
+      <div class="col s4">
+        <h4 class="language"></h4>
+        <button type="button" id="langbtn" name="button" class="btn-small waves-effect waves-light white english" style="color: black" onclick="setLanguage('en')">En</button>
+        <button type="button" name="button" class="btn-small waves-effect waves-light white swedish" style="color: black" onclick="setLanguage('sv')">Se</button>
+      </div>
+      <div class="col s4">
+        <h4 class="undoredo"></h4>
+        <button type="button" id="undoredobtn" name="button" onclick="undo()"><i class="material-icons">undo</i></button>
+        <button type="button" id="undoredobtn" name="button" onclick="redo()"><i class="material-icons">redo</i></button>
+
+      </div>
+      <div class="col s4">
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn" class="undoredobtn" onclick="openModal()"><i class="material-icons">help_outline</i></button>
+        <embed src="takeFive.mp3" id="songbtn" loop="true" width="50" height="50"></embed>
       </div>
     </div>
     <canvas id="c"></canvas>
 
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn" class="instructions"><i class="material-icons">help_outline</i></button>
+    
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
-      <div class="modal-content">
+      <div id="modal-content" class="modal-content">
         <span class="close">&times;</span>
-        <h4 class="modal-welcome">Welcome to Car Configurator</h4>
-        <p class="modal-text">Here you have the chance to visualize your dream car. We have lots of colors to choose
+        <h4 id="modal-welcome" class="modal-welcome">Welcome to Car Configurator</h4>
+        <p id="modal-text" class="modal-text">Here you have the chance to visualize your dream car. We have lots of colors to choose
           from. Click on the color you like best and check the car when it gets your newly chosen color.</p>
-          <button id="next" class="btn" onclick="goNext()">Next</button>
+          <button id="next" class="btn" onclick="nextBody()">Next</button>
       </div>
     </div>
   </div>
