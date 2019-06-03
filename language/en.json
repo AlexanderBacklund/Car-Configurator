@@ -16,5 +16,9 @@
   "redo": "Redo",
   "instructions": "Instructions",
   "modalWelcome": "Welcome to Car Configurator",
-  "modalText": "Here you have the chance to visualize your dream car. We have lots of colors to choose from. Click on the color you like best and check the car when it gets your newly chosen color."
+  "modalText": "Here you have the chance to visualize your dream car. We have lots of colors to choose from. Click on the color you like best and check the car when it gets your newly chosen color.",
+  "modalBody": "Here you can change the color of the body.",
+  "modalRim": "Here you can change the color of the rim.",
+  "modalLeather": "Here you can change the color of the leather.",
+  "modalDetails": "Here you can change the color of the details."
 }

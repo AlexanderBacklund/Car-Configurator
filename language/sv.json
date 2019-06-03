@@ -16,5 +16,9 @@
   "redo": "Göra om",
   "instructions": "Instruktioner",
   "modalWelcome": "Välkommen till Car Configurator",
-  "modalText": "Här har du chansen att visualisera din dröm bil. vi har massor av färger att välja mellan. Klicka på den färg du tycker bäst om och kolla på bilen när den får din nyvalda färg."
+  "modalText": "Här har du chansen att visualisera din dröm bil. vi har massor av färger att välja mellan. Klicka på den färg du tycker bäst om och kolla på bilen när den får din nyvalda färg.",
+  "modalBody": "Här kan du ändra färgen på karossen.",
+  "modalRim": "Här kan du ändra färgen på fälgarna.",
+  "modalLeather": "Här kan du ändra färgen på lädret.",
+  "modalDetails": "Här kan du ändra färgen på detailjerna."
 }
