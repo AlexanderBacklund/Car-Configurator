@@ -1,5 +1,6 @@
 var language;
 
+// Gets the current language
 function getLanguage() {
   (localStorage.getItem('language') == null) ? setLanguage('en'): false;
   $.ajax({
@@ -12,12 +13,13 @@ function getLanguage() {
     }
   });
 }
-
+// Changes the language
 function setLanguage(lang) {
   localStorage.setItem('language', lang);
   changeLang();
 }
 
+// Help function to change the language
 function changeLang() {
   getLanguage();
   $('.body').text(language.body);

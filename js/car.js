@@ -5,6 +5,7 @@
     undoStack = [];
     redoStack = [];
 
+    // Function for going to the top of the page
     function topFunction() {
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -120,6 +121,7 @@
       updateMaterials();
     });
 
+    // Create a body material
     var bodyMat = new THREE.MeshStandardMaterial({
       color: 'red',
       metalness: 0.8,
@@ -127,6 +129,7 @@
       name: 'orange'
     });;
 
+    // Changes the body color of the car and saves the old one to the undo stack
     function changeColorBody(_color) {
       saveToUndo();
       bodyMat = new THREE.MeshStandardMaterial({
@@ -138,6 +141,7 @@
       updateMaterials()
     }
 
+    // Create a rim material
     var rimMat = new THREE.MeshStandardMaterial({
       color: 0x000000,
       metalness: 0.8,
@@ -145,6 +149,7 @@
       name: 'orange'
     });
 
+    // Changes the rim color of the car and saves the old one to the undo stack
     function changeColorRim(_color) {
       saveToUndo();
       rimMat = new THREE.MeshStandardMaterial({
@@ -156,6 +161,7 @@
       updateMaterials()
     }
 
+    // Create a leather material
     var leatherMat = new THREE.MeshStandardMaterial({
       color: 0x7a797a,
       metalness: 0.8,
@@ -163,6 +169,7 @@
       name: 'orange'
     });
 
+    // Changes the leather color of the car and saves the old one to the undo stack
     function changeColorLeather(_color) {
       saveToUndo();
       leatherMat = new THREE.MeshStandardMaterial({
@@ -174,6 +181,7 @@
       updateMaterials()
     }
 
+    // Create a rest material
     var restMat = restMat = new THREE.MeshStandardMaterial({
       color: 'grey',
       metalness: 0.5,
@@ -181,6 +189,7 @@
       name: 'orange'
     });
 
+    // Changes the details color of the car and saves the old one to the undo stack
     function changeColorSmall(_color) {
       saveToUndo();
       restMat = new THREE.MeshStandardMaterial({
@@ -192,6 +201,7 @@
       updateMaterials()
     }
 
+    // Create a glass material
     var glassMat = new THREE.MeshStandardMaterial({
       color: 0x000ff0,
       metalness: 1,
@@ -203,7 +213,7 @@
     });
 
 
-
+    // Function for changing the different parts of the car
     function updateMaterials() {
       carParts.body.forEach(function (part) {
         part.material = bodyMat;
@@ -222,24 +232,29 @@
       });
     }
 
+    // Animates and renders the scene
     function animate() {
       render();
       requestAnimationFrame(animate);
     }
 
+    // Creates a renderer with the scene and the camera
     function render() {
       renderer.render(scene, camera);
     }
 
+    // Saves the changes to the car to the undo stack and clears the redo stack
     saveToUndo = function () {
       undoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
       redoStack = [];
     }
 
+    // Saves the old values to the redo stack
     saveToRedo = function () {
       redoStack.push([bodyMat.clone(), rimMat.clone(), glassMat.clone(), leatherMat.clone(), restMat.clone()]);
     }
 
+    // Updates the variables of the different parts of the car
     updateVariables = function (variables) {
       var _variables = variables;
       bodyMat = _variables[0];
@@ -249,6 +264,7 @@
       restMat = _variables[4];
     }
 
+    // Function for undoing the previous action, so for instance switching back to the previous color of the car
     var undo = function () {
       if (undoStack.length != 0) {
         var u = undoStack.pop();
@@ -258,6 +274,7 @@
       }
     }
 
+    // Function for redoing the previous action
     var redo = function () {
       if (redoStack.length != 0) {
         var r = redoStack.pop();

@@ -23,6 +23,7 @@ var prevColor = "";
 
 var language;
 
+// Changes the language
 function getLanguage() {
   (localStorage.getItem('language') == null) ? setLanguage('en'): false;
   $.ajax({
@@ -77,6 +78,7 @@ function end() {
   next.onclick = nextBody;
 }
 
+// Function for highlighting details in the tutorial
 function nextDetails() {
   leatherDiv.style.background = prevColor;
   leatherDiv.style.zIndex = 0;
@@ -86,6 +88,7 @@ function nextDetails() {
   next.onclick = end; 
 }
 
+// Function for highlighting leather details in the tutorial
 function nextLeather() {
   rimDiv.style.background = prevColor;
   rimDiv.style.zIndex = 0;
@@ -95,6 +98,7 @@ function nextLeather() {
   next.onclick = nextDetails;
 }
 
+// Function for highlighting rim details in the tutorial
 function nextRim() {
   bodyDiv.style.background = prevColor;
   bodyDiv.style.zIndex = 0;
@@ -104,6 +108,7 @@ function nextRim() {
   next.onclick = nextLeather;
 }
 
+// Function for highlighting body details in the tutorial
 function nextBody() {
   bodyDiv.style.background = "white";
   bodyDiv.zIndex = 2;
